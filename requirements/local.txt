@@ -1,0 +1,4 @@
+django-debug-toolbar==1.2.1
+flake8==2.2.2
+ipdb==0.8
+ipython==2.2.0

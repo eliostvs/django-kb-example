@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load kbtags %}
+
+{% block search %}
+    {% include "kb/search_form.html" with form=search_form %}
+{% endblock search %}
+
+{% block content %}
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'kb:homepage' %}">{% trans "Home" %}</a></li>
+        </ol>
+    </section>
+
+    <section>
+        <header>
+            <h1 class="no-top">{{ object.name }}</h1>
+        </header>
+
+        <p>{{ object.description }}</p>
+    </section>
+
+    {% include "kb/top_list.html" with articles=object_list name="Articles"%}
+
+    {% top_rated_articles 5 object.slug as top_rated %}
+    {% if top_rated %}
+        {% include "kb/top_list.html" with articles=top_rated name="Top Rated"%}
+    {% endif %}
+
+    {% top_viewed_articles 5 object.slug as top_viewed %}
+    {% include "kb/top_list.html" with articles=top_viewed name="Top Viewed"%}
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<section {% if cls %} class="{{ cls }}"{% endif %}>
+    <header>
+        <h4 class="border-bottom">{% blocktrans %}{{ name }}{% endblocktrans %}</h4>
+    </header>
+
+    <div class="row">
+        <ul>
+            {% for article in articles %}
+                <li class="col-md-6">
+                    <a href="{% url 'kb:article_detail' article.slug %}">
+                        <span class="glyphicon glyphicon-file margin-right"></span>
+                        {{ article.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

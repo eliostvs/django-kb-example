@@ -1,0 +1,14 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<div id="feedback">
+    <p class="text-center">
+        <span>{% trans "Was this helpful?" %}</span>
+        <a href="{% url 'kb:vote' object.slug 1 %}" rel="nofollow" id="upvote" class="voter btn btn-large btn-success">
+            <span class="glyphicon glyphicon-ok"></span>
+        </a>
+        <a href="{% url 'kb:vote' object.slug -1 %}" rel="nofollow" id="downvote" class="voter btn btn-large btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+    </p>
+</div>

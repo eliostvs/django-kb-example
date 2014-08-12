@@ -1,0 +1,39 @@
+<div>
+    <h2><a href="{{ result.get_absolute_url }}">{{ result.title }}</a></h2>
+
+    <p>{{ result.content.raw|truncatewords:50 }}...</p>
+
+    <div class="result-meta">
+        <ul>
+            <li>
+                <a href="{% url 'kb:category_detail' result.category.slug %}">
+                    <span class="glyphicon glyphicon-book margin-right"></span>
+                    {{ result.category.name }}
+                </a>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-calendar margin-right"></span>
+                {{ result.modified|date:"SHORT_DATE_FORMAT" }}
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-eye-open margin-right"></span>
+                {{ result.hits }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="result-tags">
+        <ul>
+            {% for tag in result.tags.all %}
+                <li>
+                    <a href="{% url 'kb:search_tag' tag.slug %}">
+                        <span class="badge">
+                            {{ tag.name }}
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>

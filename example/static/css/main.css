@@ -1,0 +1,102 @@
+/*! project specific CSS goes here. */
+
+/*Basic*/
+ul {
+    list-style-type: none;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 17px;
+}
+
+.asteriskField {
+    display: none;
+}
+
+/*Homepage*/
+#content {
+    min-height: 470px;
+}
+
+#banner {
+    background-color: #34495E;
+    padding: 40px;
+}
+
+#banner h3 {
+    color: #fff;
+    padding: 5px 0;
+}
+
+#container-search {
+    margin: 2% 0;
+}
+
+#btn-search {
+    color: #34495E;
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+.category h5 {
+    line-height: 31px;
+    margin: 0;
+}
+
+.category li {
+    margin-left: 30px;
+}
+
+#footer {
+    height: 100px;
+    background-color: #34495E;
+    display: flex;
+}
+
+#footer p {
+    display: flex;
+    margin: auto;
+}
+
+/* Common */
+
+.margin-right {
+    margin-right: 5px;
+}
+
+section {
+    margin: 0px 0 35px 0;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #CACFD2;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.no-top {
+    padding-top: 0px;
+    margin-top: 0px;
+}

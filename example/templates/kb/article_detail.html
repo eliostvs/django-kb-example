@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+{% load kbtags %}
+
+{% block extra_css %}
+    <link href="{% static 'css/article.css' %}" rel="stylesheet">
+{% endblock extra_css %}
+
+{% block search %}
+    {% include "kb/search_form.html" with form=search_form %}
+{% endblock search %}
+
+{% block content %}
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'kb:homepage' %}">{% trans "Home" %}</a></li>
+            <li><a href="{% url 'kb:category_detail' article.category.slug %}">{{ article.category.name }}</a></li>
+        </ol>
+    </section>
+
+    <section class="col-md-10">
+        <header>
+            <h1 class="no-top">{{ article.title }}</h1>
+        </header>
+
+        <article>
+            <p>{{ article.content.rendered|safe }}</p>
+        </article>
+
+        <footer>
+            {% feedback 'kb/feedback.html' %}
+        </footer>
+    </section>
+
+    <aside class="col-md-2">
+        <div class="row">
+            <section class="col-md-12 article-meta">
+                <ul>
+                    <li>
+                        <span class="glyphicon glyphicon-user margin-right"></span>
+                        {{ article.created_by.username }}
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-calendar margin-right"></span>
+                        {{ article.modified|date:"SHORT_DATE_FORMAT" }}
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-eye-open margin-right"></span>
+                        {{ article.hits }}
+                    </li>
+                    <li>
+                        <span class="glyphicon glyphicon-heart margin-right"></span>
+                        {{ article.votes.upvotes }}
+                    </li>
+                </ul>
+            </section>
+
+            {% if tags %}
+                <section class="col-md-12 article-meta">
+                    <ul> <strong>Tags</strong>
+                        {% for tag in tags %}
+                           <li>
+                                <a href="{% url 'kb:search_tag' tag.slug %}">
+                                    <span class="badge">{{ tag.name }}</span>
+                                </a>
+                           </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+        </div>
+    </aside>
+
+    {% if related %}
+        {% include "kb/top_list.html" with cls="col-md-10" articles=related name="Related Articles" %}
+    {% endif %}
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static "kb/js/feedback.js" %}"></script>
+{% endblock extra_js %}

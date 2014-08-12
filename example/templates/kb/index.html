@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load kbtags %}
+
+{% block search %}
+    {{ block.super }}
+    {% include "kb/search_form.html" with form=search_form %}
+{% endblock search %}
+
+{% block content %}
+
+    {% top_rated_articles as top_rated %}
+    {% if top_rated %}
+        {% include "kb/top_list.html" with articles=top_rated name="Top Rated"%}
+    {% endif %}
+
+    {% top_viewed_articles as top_viewed %}
+    {% include "kb/top_list.html" with articles=top_viewed name="Top Viewed"%}
+
+    <section>
+        <header>
+            <h4 class="border-bottom">Categories</h4>
+        </header>
+
+        <div class="row">
+            {% for category in categories %}
+                <div class="col-md-6 category">
+                    <ul>
+                        <h5>
+                            <a href="{% url 'kb:category_detail' category.slug %}">
+                                <span class="glyphicon glyphicon-book margin-right"></span>
+                                {{ category.name }}
+                               ({{ category.count_articles }})
+                            </a>
+                        </h5>
+
+                        {% for article in category.published_articles %}
+                        <li>
+                            <a href="{% url 'kb:article_detail' article.slug %}">
+                                <small>{{ article.title }}</small>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock content %}

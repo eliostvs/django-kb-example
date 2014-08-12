@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %} {% trans "Search Results" %}{% endblock title %}
+
+{% block extra_css %}
+    <link href="{% static 'css/search.css' %}" rel="stylesheet">
+{% endblock extra_css %}
+
+{% block search %}
+    {% include "kb/search_form.html" %}
+{% endblock search %}
+
+{% block content %}
+    <section>
+        <header>
+            <h4 class="border-bottom">{% blocktrans %}Search Results For "{{ query }}"{% endblocktrans %}</h4>
+        </header>
+
+        {% for result in page.object_list %}
+            {% include "kb/result_list.html" with result=result.object %}
+        {% empty %}
+            <p>{% trans "No results found." %}</p>
+        {% endfor %}
+    </section>
+{% endblock content %}
